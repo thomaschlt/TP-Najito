@@ -23,6 +23,17 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
+  imgDetails: {
+    width: 300,
+    height: 300,
+  },
+  titleDetails: { fontSize: 30, fontWeight: "bold", marginTop: 20 },
+  instructionsDetails: {
+    fontSize: 20,
+    paddingTop: 20,
+    marginHorizontal: 5,
+    textAlign: "center",
+  },
 });
 
 // Common stack header options

@@ -7,6 +7,7 @@ import {
   FlatList,
   Image,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import styles from "../theme/styles";
 import CocktailService from "../api/cocktailService";
@@ -21,11 +22,17 @@ const CocktailScreen = ({ navigation }) => {
     setSearchResults(results);
   };
 
+  const handlePress = (item) => {
+    navigation.navigate("Details", item);
+  };
+
   const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <Image style={styles.image} source={{ uri: item.image }} />
-      <Text style={styles.title}>{item.name}</Text>
-    </View>
+    <TouchableOpacity onPress={() => handlePress(item)}>
+      <View style={styles.item}>
+        <Image style={styles.image} source={{ uri: item.image }} />
+        <Text style={styles.title}>{item.name}</Text>
+      </View>
+    </TouchableOpacity>
   );
 
   return (

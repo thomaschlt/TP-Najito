@@ -1,6 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CocktailScreen from "../screens/CocktailScreen";
+import DetailsScreen from "../screens/CocktailDetailsScreen";
 import { screenOptions } from "../theme/styles";
 
 // Screen stack for home tab
@@ -17,6 +18,7 @@ const CocktailsNavigator = () => {
         component={CocktailScreen}
         options={{ title: "My cocktails" }}
       />
+      <CocktailsStack.Screen name="Details" component={DetailsScreen} />
     </CocktailsStack.Navigator>
   );
 };
