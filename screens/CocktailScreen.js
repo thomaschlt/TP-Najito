@@ -1,11 +1,46 @@
-import React from "react";
-import { Text, View, Button } from "react-native";
+import React, { useState } from "react";
+import {
+  Text,
+  View,
+  Button,
+  TextInput,
+  FlatList,
+  Image,
+  Dimensions,
+} from "react-native";
 import styles from "../theme/styles";
+import CocktailService from "../api/cocktailService";
 
 const CocktailScreen = ({ navigation }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const searchCocktails = async (query) => {
+    const results = await CocktailService.searchCocktailsByName(query);
+    console.log(results);
+    setSearchResults(results);
+  };
+
+  const renderItem = ({ item }) => (
+    <View style={styles.item}>
+      <Image style={styles.image} source={{ uri: item.image }} />
+      <Text style={styles.title}>{item.name}</Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Nothing to drink yet !</Text>
+      <TextInput
+        placeholder="Enter a cocktail name"
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        onSubmitEditing={() => searchCocktails(searchQuery)}
+      />
+      <FlatList
+        data={searchResults}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 };
